@@ -4,7 +4,8 @@ const router = express.Router();
 const mysql = require('mysql');
 const users = require('../data')
 const uuid = require('uuid')
-const { MYSQL_USERNAME, MYSQL_PASSWORD, DATABASE_NAME } = process.env;
+// const { MYSQL_USERNAME, MYSQL_PASSWORD, DATABASE_NAME } = process.env;
+const { MYSQL_HOST, MYSQL_USERNAME, MYSQL_PASSWORD, DATABASE_NAME } = process.env;
 // const users = [{
 //     id: 1,
 //     name: 'john',
@@ -21,15 +22,25 @@ const { MYSQL_USERNAME, MYSQL_PASSWORD, DATABASE_NAME } = process.env;
 //     database: "employeessys"
 // }
 // );
-console.log(MYSQL_USERNAME,MYSQL_PASSWORD,DATABASE_NAME);
+// console.log(MYSQL_USERNAME,MYSQL_PASSWORD,DATABASE_NAME);
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: `${MYSQL_HOST}`,
     user: `${MYSQL_USERNAME}`,
     password: `${MYSQL_PASSWORD}`,
     database: `${DATABASE_NAME}`
 }
 );
+
+
+
+// const db = mysql.createConnection({
+//     host: "localhost",
+//     user: `${MYSQL_USERNAME}`,
+//     password: `${MYSQL_PASSWORD}`,
+//     database: `${DATABASE_NAME}`
+// }
+// );
 
 
 router.get('/employees', (req, res) => {
